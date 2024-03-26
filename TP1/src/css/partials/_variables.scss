@@ -1,0 +1,49 @@
+@use "sass:color";
+@use "functions" as f;
+
+$breakpoints: (
+	sm: 640px,
+	md: 768px,
+	lg: 1024px,
+	xl: 1280px,
+	xxl: 1536px,
+);
+
+$step: 0.25rem;
+
+/* Couleurs */
+$colors: (
+	"white": #fff,
+	"black": #000,
+	"blue": #5d7a97,
+	"pink": #ff2896,
+	"orange": #ff6613,
+	"green": #00ffbf,
+);
+
+:root {
+	/* Couleurs */
+	@each $name, $value in $colors {
+		@if ($name != "white" and $name != "black") {
+			@for $i from 0 through 10 {
+				$suffix: "";
+				@if ($i == 0) {
+					$suffix: 50;
+				} @else if($i == 10) {
+					$suffix: 950;
+				} @else {
+					$suffix: $i * 100;
+				}
+				$increment: 8%;
+				$offset: (5 - $i) * $increment;
+				$color: color.adjust($value, $lightness: $offset);
+				--#{$name}-#{$suffix}: #{$color};
+			}
+		} @else {
+			--#{$name}: #{$value};
+		}
+	}
+
+	/* Spacing, radius */
+	--main-radius: #{f.rem(16)};
+}
