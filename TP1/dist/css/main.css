@@ -232,6 +232,7 @@ summary {
 
 body {
   font-family: "Istok Web", sans-serif;
+  background-color: var(--body-bg-color);
 }
 
 img {
@@ -289,64 +290,71 @@ img {
   --green-800: #008563;
   --green-900: #005c45;
   --green-950: #003326;
+  /* Couleurs agnostiques */
+  --body-bg-color: var(--white);
   /* Spacing, radius */
   --main-radius: 1rem;
 }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --body-bg-color: var(--black);
+  }
+}
 
 .mt-0 {
-  margin-top: 0rem;
+  margin-top: 0rem !important;
 }
 
 .mb-0 {
-  margin-bottom: 0rem;
+  margin-bottom: 0rem !important;
 }
 
 .mt-1 {
-  margin-top: 0.25rem;
+  margin-top: 0.25rem !important;
 }
 
 .mb-1 {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.25rem !important;
 }
 
 .mt-2 {
-  margin-top: 0.5rem;
+  margin-top: 0.5rem !important;
 }
 
 .mb-2 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem !important;
 }
 
 .mt-3 {
-  margin-top: 0.75rem;
+  margin-top: 0.75rem !important;
 }
 
 .mb-3 {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.75rem !important;
 }
 
 .mt-4 {
-  margin-top: 1rem;
+  margin-top: 1rem !important;
 }
 
 .mb-4 {
-  margin-bottom: 1rem;
+  margin-bottom: 1rem !important;
 }
 
 .mt-5 {
-  margin-top: 1.25rem;
+  margin-top: 1.25rem !important;
 }
 
 .mb-5 {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.25rem !important;
 }
 
 .mt-6 {
-  margin-top: 1.5rem;
+  margin-top: 1.5rem !important;
 }
 
 .mb-6 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem !important;
 }
 
 .container {
@@ -380,18 +388,42 @@ img {
 }
 
 .bioCard {
-  width: 20rem;
+  --width: 20rem;
+  --padding: 2rem;
+  --bg-color: var(--blue-800);
+  --text-color: var(--blue-500);
+  --gradientColor1: var(--green-500);
+  --gradientColor2: var(--green-600);
+  --gradientColor3: var(--pink-400);
+  --gradientColor4: var(--orange-300);
+  --pillButtonColor: var(--pink-500);
+  --pillButtonColorAlt: var(--black);
+  --imageFilter: saturate(0);
+  width: var(--width);
+  padding: var(--padding);
   border-radius: var(--main-radius);
-  padding: 2rem;
-  background-color: var(--blue-800);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   overflow: hidden;
+  position: relative;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: stretch;
   gap: 0;
-  position: relative;
+}
+@media (prefers-color-scheme: dark) {
+  .bioCard {
+    --bg-color: var(--white);
+    --gradientColor1: var(--pink-400);
+    --gradientColor2: var(--orange-300);
+    --gradientColor3: var(--green-500);
+    --gradientColor4: var(--green-600);
+    --pillButtonColor: var(--blue-500);
+    --pillButtonColorAlt: var(--white);
+    --imageFilter: saturate(1);
+  }
 }
 .bioCard__header {
   position: absolute;
@@ -410,8 +442,103 @@ img {
   border-radius: 50rem;
   aspect-ratio: 1/1;
   width: 11rem;
-  filter: saturate(0);
+  filter: var(--imageFilter);
   align-self: center;
+  margin-bottom: 1.5rem;
+}
+.bioCard__h1 {
+  background: linear-gradient(to bottom, var(--gradientColor3) 0%, var(--gradientColor4) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  line-height: 1;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+.bioCard__h2 {
+  text-align: center;
+  line-height: 1;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+.bioCard__hr {
+  border-color: var(--blue-500);
+}
+.bioCard__p {
+  text-align: center;
+  line-height: normal;
+  margin-bottom: 3rem;
+}
+.bioCard__ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+}
+.bioCard__a {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  border-radius: 20rem;
+  aspect-ratio: 1/1;
+  width: 2rem;
+  background: var(--white);
+}
+.bioCard__a svg {
+  height: 50%;
+  width: auto;
+}
+.bioCard__a svg path {
+  fill: var(--pillButtonColor);
+}
+.bioCard__a--alt {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  border-radius: 20rem;
+  aspect-ratio: 1/1;
+  width: 2rem;
+  background: linear-gradient(to bottom, var(--gradientColor1), var(--gradientColor2));
+}
+.bioCard__a--alt svg {
+  height: 50%;
+  width: auto;
+  width: 75%;
+  height: auto;
+}
+.bioCard__a--alt svg path {
+  fill: var(--pillButtonColorAlt);
+}
+.bioCard__footer {
+  position: relative;
+}
+.bioCard__footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: calc(-1 * var(--padding));
+  margin-bottom: calc(-2 * var(--padding));
+  background: linear-gradient(-187deg, var(--gradientColor4) -20%, var(--gradientColor3) 50%);
+  transform: skewY(7deg);
 }
 
 /*# sourceMappingURL=main.css.map */

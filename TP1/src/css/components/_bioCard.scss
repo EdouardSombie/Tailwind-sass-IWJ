@@ -1,14 +1,48 @@
 @use "../partials/functions" as f;
 @use "../partials/mixins" as m;
+@use "../partials/variables" as v;
+@use "sass:map";
 
 .bioCard {
-	width: f.rem(320);
+	// Variables locales du composant
+	--width: #{f.rem(320)};
+	--padding: #{f.rem(32)};
+	--bg-color: var(--blue-800);
+	--text-color: var(--blue-500);
+	--gradientColor1: var(--green-500);
+	--gradientColor2: var(--green-600);
+	--gradientColor3: var(--pink-400);
+	--gradientColor4: var(--orange-300);
+	--pillButtonColor: var(--pink-500);
+	--pillButtonColorAlt: var(--black);
+	--imageFilter: saturate(0);
+
+	@media (prefers-color-scheme: dark) {
+		--bg-color: var(--white);
+		--gradientColor1: var(--pink-400);
+		--gradientColor2: var(--orange-300);
+		--gradientColor3: var(--green-500);
+		--gradientColor4: var(--green-600);
+		--pillButtonColor: var(--blue-500);
+		--pillButtonColorAlt: var(--white);
+		--imageFilter: saturate(1);
+	}
+
+	@media (width >= map.get(v.$breakpoints, "md")) {
+		// styles desktop
+		// si on modifie des regles css ici, il faut mettre cette media query à la fin...
+	}
+
+	width: var(--width);
+	padding: var(--padding);
 	border-radius: var(--main-radius);
-	padding: f.rem(32);
-	background-color: var(--blue-800);
+	background-color: var(--bg-color);
+	color: var(--text-color);
+
 	overflow: hidden;
-	@include m.flexbox(column, nowrap, flex-start, stretch);
 	position: relative;
+	@include m.flexbox(column, nowrap, flex-start, stretch);
+
 	&__header {
 		position: absolute;
 		top: 0;
@@ -20,7 +54,77 @@
 	&__img {
 		@include m.roundImage(50rem);
 		width: f.rem(176);
-		filter: saturate(0);
+		filter: var(--imageFilter);
 		align-self: center;
+		margin-bottom: f.rem(24);
+	}
+	&__h1 {
+		@include m.textGradient(
+			bottom,
+			var(--gradientColor3),
+			var(--gradientColor4)
+		);
+		text-align: center;
+		line-height: 1;
+		font-size: f.rem(24);
+		font-weight: 700;
+		margin-top: 0;
+		margin-bottom: f.rem(12);
+	}
+	&__h2 {
+		text-align: center;
+		line-height: 1;
+		font-size: f.rem(20);
+		font-weight: 400;
+		margin-top: 0;
+		margin-bottom: f.rem(24);
+	}
+	&__hr {
+		border-color: var(--blue-500);
+	}
+	&__p {
+		text-align: center;
+		line-height: normal;
+		margin-bottom: f.rem(48);
+	}
+	&__ul {
+		@include m.resetList;
+		@include m.flexbox(row, nowrap, center, center, #{f.rem(24)});
+		position: relative;
+	}
+	&__a {
+		@include m.pillButton(var(--white), var(--pillButtonColor));
+		&--alt {
+			@include m.pillButton(
+				linear-gradient(
+					to bottom,
+					var(--gradientColor1),
+					var(--gradientColor2)
+				),
+				var(--pillButtonColorAlt),
+				true
+			);
+		}
+	}
+	&__footer {
+		position: relative;
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: calc(
+				-1 * var(--padding)
+			); // permet de déborder des limites du parent
+			margin-bottom: calc(-2 * var(--padding));
+			background: linear-gradient(
+				-187deg,
+				var(--gradientColor4) -20%,
+				var(--gradientColor3) 50%
+			);
+			transform: skewY(7deg);
+		}
 	}
 }

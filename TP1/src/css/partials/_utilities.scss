@@ -2,9 +2,9 @@
 
 @for $i from 0 through 6 {
 	.mt-#{$i} {
-		margin-top: $i * v.$step;
+		margin-top: $i * v.$step !important;
 	}
 	.mb-#{$i} {
-		margin-bottom: $i * v.$step;
+		margin-bottom: $i * v.$step !important;
 	}
 }
