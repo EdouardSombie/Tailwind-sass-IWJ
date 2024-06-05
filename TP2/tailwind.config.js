@@ -1,8 +1,70 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: ["index.html", "./src/html/*.html"],
-	theme: {
-		extend: {},
-	},
-	plugins: [],
+  content: ["index.html", "./src/html/*.html"],
+  theme: {
+    extend: {
+      skew: {
+        7: "7deg",
+      },
+      backgroundImage: {
+        "gradient-187": "linear-gradient(-187deg, var(--tw-gradient-stops))",
+      },
+      colors: {
+        orange: {
+          50: "#fff4ed",
+          100: "#ffe6d4",
+          200: "#ffc9a9",
+          300: "#ff9b65",
+          400: "#fe7239",
+          500: "#fc4d13",
+          600: "#ed3209",
+          700: "#c52209",
+          800: "#9c1d10",
+          900: "#7e1a10",
+          950: "#440a06",
+        },
+
+        blue: {
+          50: "#f5f7fa",
+          100: "#e9eef5",
+          200: "#cedae9",
+          300: "#a3bad6",
+          400: "#7297be",
+          500: "#507aa7",
+          600: "#3d618c",
+          700: "#334e71",
+          800: "#2d445f",
+          900: "#2a3a50",
+          950: "#1e293a",
+        },
+        aquamarine: {
+          50: "#e7fff8",
+          100: "#c6ffeb",
+          200: "#92ffde",
+          300: "#4dffd2",
+          400: "#00ffbf",
+          500: "#00e8ab",
+          600: "#00be8e",
+          700: "#009876",
+          800: "#00785f",
+          900: "#00624f",
+          950: "#00382e",
+        },
+        pink: {
+          50: "#fef1f8",
+          100: "#fee5f3",
+          200: "#ffcaea",
+          300: "#ff9fd7",
+          400: "#ff63ba",
+          500: "#ff2896",
+          600: "#f01279",
+          700: "#d1055e",
+          800: "#ad074d",
+          900: "#8f0c43",
+          950: "#580024",
+        },
+      },
+    },
+  },
+  plugins: [],
 };
